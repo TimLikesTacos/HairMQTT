@@ -1,0 +1,17 @@
+[package]
+name = "hairmqtt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dotenvy = "0.15.7"
+ir_telemetry = { git = "https://github.com/TimLikesTacos/ir_telemetry.git", version = "0.1.0", features = [
+    "value_only_measurement",
+] }
+log = "0.4.22"
+pretty_env_logger = "0.5.0"
+rumqttc = { version = "0.23", features = ["websocket", "url"] }
+ha_mqtt = { git = "https://github.com/TimLikesTacos/ha_mqtt.git", version = "0.1.0" }
+serde_json = "1.0.120"
+serde_yaml = "0.9.33"
+serde = "1.0.204"
