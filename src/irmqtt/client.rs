@@ -3,7 +3,7 @@ use serde::Serialize;
 
 use super::error::MqttError;
 
-const APPNAME: &str = "IrMqtt";
+const APPNAME: &str = "HairMqtt";
 
 pub(crate) type DiscoveryPrepPacket = (String, Result<Vec<u8>, Box<dyn std::error::Error>>);
 pub(crate) struct MqttClient(Client);
@@ -21,7 +21,7 @@ impl MqttConnection {
         mqttoptions.set_transport(Transport::Ws);
 
         // Since we can send the entire data update, lets bump up the max packet size significantly
-        mqttoptions.set_max_packet_size(10240, 10240 * 4);
+        mqttoptions.set_max_packet_size(10240, 10240 * 8);
 
         match (creds.username(), creds.password()) {
             (Some(username), Some(password)) => {
