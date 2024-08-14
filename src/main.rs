@@ -29,8 +29,10 @@ pub(crate) mod entity_builders;
 fn main() {
     pretty_env_logger::init_timed();
     if let Err(_) = dotenv() {
-        log::error!("Did not find .env file");
+        log::debug!("Did not find .env file");
     }
+
+    log::info!("Starting iracing telemetry to mqtt bridge");
 
     // Update 2 times a second.  This is reasonable for this application
     let telemetry = IracingClient::connect(2.);
@@ -233,7 +235,7 @@ fn discovery_packet(
         .with_expire_after(5)
         .with_payload_on("on")
         .with_payload_off("off")
-        .with_value_template("{{ 'on' if 'Green' in value_json.SessionFlags else 'off' }}")
+        .with_value_template("{{ 'on' if 'Green Flag' in value_json.SessionFlags else 'off' }}")
         .with_unique_id("hairmqtt-green-flag")
         .with_object_id("green_flag");
 
@@ -244,7 +246,7 @@ fn discovery_packet(
         .with_icon("mdi:flag")
         .with_payload_on("on")
         .with_payload_off("off")
-        .with_value_template("{{ 'on' if 'Checkered' in value_json.SessionFlags else 'off' }}")
+        .with_value_template("{{ 'on' if 'Checkered Flag' in value_json.SessionFlags else 'off' }}")
         .with_unique_id("hairmqtt-checkered-flag")
         .with_object_id("checkered_flag");
 
@@ -255,7 +257,7 @@ fn discovery_packet(
         .with_icon("mdi:flag")
         .with_payload_on("on")
         .with_payload_off("off")
-        .with_value_template("{{ 'on' if 'White' in value_json.SessionFlags else 'off' }}")
+        .with_value_template("{{ 'on' if 'White Flag' in value_json.SessionFlags else 'off' }}")
         .with_unique_id("hairmqtt-white-flag")
         .with_object_id("white_flag");
 
@@ -266,7 +268,7 @@ fn discovery_packet(
         .with_icon("mdi:flag")
         .with_payload_on("on")
         .with_payload_off("off")
-        .with_value_template("{{ 'on' if 'Blue' in value_json.SessionFlags else 'off' }}")
+        .with_value_template("{{ 'on' if 'Blue Flag' in value_json.SessionFlags else 'off' }}")
         .with_unique_id("hairmqtt-blue-flag")
         .with_object_id("blue_flag");
 
